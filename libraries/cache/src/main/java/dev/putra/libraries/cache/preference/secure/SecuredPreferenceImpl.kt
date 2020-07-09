@@ -97,4 +97,11 @@ class SecuredPreferenceImpl(val preference: SharedPreferences, private val keyTo
             apply()
         }
     }
+
+    override fun clearAll() {
+        preference.edit()?.apply {
+            clear()
+            apply()
+        }
+    }
 }

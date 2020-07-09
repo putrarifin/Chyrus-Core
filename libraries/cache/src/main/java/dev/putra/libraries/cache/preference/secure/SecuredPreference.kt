@@ -11,4 +11,5 @@ interface SecuredPreference {
     fun getBoolean(key: String): Boolean
     fun getArrayString(key: String): ArrayList<String>
     fun clearPref(key: String)
+    fun clearAll()
 }
