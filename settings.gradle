@@ -1,0 +1,12 @@
+include ':app'
+include ':libraries:core'
+include ':libraries:network'
+include ':commons:utilities'
+include ':commons:ui'
+include ':commons:widget'
+include ':libraries:cache'
+include ':domains:utangku'
+include ':domains:directus'
+include ':libraries:security'
+include ':libraries:picker'
+rootProject.name = "Chyrus Core"

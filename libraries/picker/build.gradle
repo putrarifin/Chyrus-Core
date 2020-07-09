@@ -1,0 +1,30 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    defaultConfig {
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation project(':commons:ui')
+    api "androidx.exifinterface:exifinterface:1.2.0"
+    //More Info: https://github.com/Yalantis/uCrop
+    api 'com.github.yalantis:ucrop:2.2.4'
+    //More Info: https://github.com/florent37/InlineActivityResult
+    api 'com.github.florent37:inline-activity-result-kotlin:1.0.3'
+
+    testImplementation 'junit:junit:4.13'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
