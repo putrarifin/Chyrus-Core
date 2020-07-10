@@ -1,6 +1,5 @@
 package dev.putra.libraries.network.interceptor
 
-import dev.putra.commons.utilities.extension.toStringJson
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
@@ -17,8 +16,11 @@ class HeaderInterceptor(private val headerMaps: () -> Map<String, String>) :
 
     private fun rebuildRequest(request: Request) = request.newBuilder().apply {
         headerMaps.invoke().forEach { map ->
-            println(map.toStringJson())
-            addHeader(map.key, map.value)
+            try {
+                addHeader(map.key, map.value)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
     }.build()
 
