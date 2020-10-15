@@ -17,10 +17,10 @@ android {
 
 dependencies {
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    api 'androidx.appcompat:appcompat:1.1.0'
-    api 'androidx.core:core-ktx:1.3.0'
+    api 'androidx.appcompat:appcompat:1.2.0'
+    api 'androidx.core:core-ktx:1.3.2'
 
-    def coroutines = "1.3.3"
+    def coroutines = "1.3.7"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines"
 
@@ -38,16 +38,16 @@ dependencies {
     kapt "com.google.auto.service:auto-service:$auto_service"
 
     api 'com.google.code.gson:gson:2.8.6'
-    def retrofit = "2.7.1"
+    def retrofit = "2.9.0"
     api "com.squareup.retrofit2:retrofit:$retrofit"
     api "com.squareup.retrofit2:converter-gson:$retrofit"
-    def okhttp = "4.4.0"
+    def okhttp = "4.9.0"
     api "com.squareup.okhttp3:okhttp:$okhttp"
     api "com.squareup.okhttp3:logging-interceptor:$okhttp"
 
     api "com.jakewharton.timber:timber:4.7.1"
 
-    testImplementation 'junit:junit:4.13'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    testImplementation "junit:junit:$junit"
+    androidTestImplementation "androidx.test.ext:junit:$junit_ext"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core"
 }
