@@ -41,7 +41,9 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
     }
 
     protected fun handleError(error: ErrorNetwork) {
-        context?.toast(error.message)
+        activity?.let{
+            (it as BaseActivity<*>).handleError(error = error)
+        }
     }
 
     protected fun handleLoading(isLoading: Boolean) {

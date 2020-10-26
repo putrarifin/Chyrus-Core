@@ -17,6 +17,7 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
     lateinit var binding: T
 
     protected abstract fun initialized()
+    protected abstract fun handleShouldLogout()
 
     private val loader by lazy {
         ProgressDialog.getInstance(this)
@@ -29,8 +30,11 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
         initialized()
     }
 
-    protected fun handleError(error: ErrorNetwork) {
+    fun handleError(error: ErrorNetwork) {
         toast(error.message)
+        if (error.code == 401) {
+            handleShouldLogout()
+        }
     }
 
     protected fun handleLoading(isLoading: Boolean) {
