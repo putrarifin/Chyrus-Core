@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import dev.putra.commons.ui.extension.toLiveData
 import dev.putra.commons.utilities.data.ErrorNetwork
 
-class BaseViewModel : ViewModel() {
+abstract class BaseViewModel : ViewModel() {
 
     private val _loading = MutableLiveData<Boolean>()
     val loading by lazy { _loading.toLiveData() }
