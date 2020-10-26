@@ -7,9 +7,9 @@ import dev.putra.commons.utilities.data.ErrorNetwork
 
 abstract class BaseViewModel : ViewModel() {
 
-    private val _loading = MutableLiveData<Boolean>()
+    protected val _loading = MutableLiveData<Boolean>()
     val loading by lazy { _loading.toLiveData() }
-    private val _error = MutableLiveData<ErrorNetwork>()
+    protected val _error = MutableLiveData<ErrorNetwork>()
     val error by lazy { _error.toLiveData() }
 
 }
