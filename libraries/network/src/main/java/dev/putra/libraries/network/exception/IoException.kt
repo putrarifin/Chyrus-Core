@@ -10,7 +10,7 @@ import dev.putra.libraries.network.data.ErrorResponse
 import retrofit2.HttpException
 import java.io.IOException
 
-internal class IoException(
+class IoException(
     private val errorMessage: String?,
     private val code: Int
 ) : IOException(errorMessage) {
