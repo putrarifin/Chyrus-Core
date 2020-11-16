@@ -6,6 +6,7 @@ import androidx.viewbinding.ViewBinding
 import dev.putra.commons.ui.extension.toast
 import dev.putra.commons.ui.utils.ProgressDialog
 import dev.putra.commons.utilities.data.ErrorNetwork
+import dev.putra.commons.widget.ProgressBarDialog
 
 /**
  * Created by Chyrus on 3/28/2020.
@@ -20,7 +21,7 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
     protected abstract fun handleShouldLogout()
 
     private val loader by lazy {
-        ProgressDialog.getInstance(this)
+        ProgressBarDialog(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
