@@ -21,10 +21,6 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
 
     protected abstract fun initialized()
 
-    private val loader by lazy {
-        ProgressDialog.getInstance(requireContext())
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -47,10 +43,8 @@ abstract class BaseFragment<T : ViewBinding> : Fragment() {
     }
 
     protected fun handleLoading(isLoading: Boolean) {
-        if (isLoading) {
-            loader.show()
-        } else {
-            loader.dismiss()
+        activity?.let{
+            (it as BaseActivity<*>).handleLoading(isLoading = isLoading)
         }
     }
 
