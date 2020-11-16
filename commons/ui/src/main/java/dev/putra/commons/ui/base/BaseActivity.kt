@@ -37,7 +37,7 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
         }
     }
 
-    protected fun handleLoading(isLoading: Boolean) {
+    fun handleLoading(isLoading: Boolean) {
         if (isLoading) {
             loader.show()
         } else {

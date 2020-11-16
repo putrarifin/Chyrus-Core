@@ -6,8 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
-import dev.putra.commons.ui.extension.toast
-import dev.putra.commons.ui.utils.ProgressDialog
 import dev.putra.commons.utilities.data.ErrorNetwork
 
 /**
