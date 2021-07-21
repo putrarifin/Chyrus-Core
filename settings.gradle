@@ -1,3 +1,7 @@
+include ':domains:todo'
+include ':features:todo'
+include ':features:favorite'
+include ':features:auth'
 include ':app'
 include ':libraries:core'
 include ':libraries:network'

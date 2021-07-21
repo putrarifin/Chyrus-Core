@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "231667263752",
+    "project_id": "utangku-id",
+    "storage_bucket": "utangku-id.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:231667263752:android:04f726a20fb7b4ad8b24bd",
+        "android_client_info": {
+          "package_name": "dev.putra.chyruscore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "231667263752-s29am01ju0me8vacup3eq619c6rbu6ei.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvUQSpu6NkVm7Z71Sc6FHpDx_iSaf4aOQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "231667263752-s29am01ju0me8vacup3eq619c6rbu6ei.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

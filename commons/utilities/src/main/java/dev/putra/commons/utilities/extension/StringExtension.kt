@@ -8,6 +8,7 @@ import android.annotation.SuppressLint
 import android.text.Spanned
 import androidx.core.text.HtmlCompat
 import java.security.MessageDigest
+import java.util.*
 import java.util.regex.Pattern
 
 @SuppressLint("DefaultLocale")
@@ -18,7 +19,7 @@ fun String.formatInitial(): String? {
     while (matcher.find()) {
         initials += matcher.group().trim()
     }
-    return initials.toUpperCase()
+    return initials.uppercase(Locale.getDefault())
 }
 
 fun String.toHtmlFormat(): Spanned {

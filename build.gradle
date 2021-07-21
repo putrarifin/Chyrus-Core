@@ -1,18 +1,22 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     apply from: "dependencies.gradle"
-    ext.kotlin_version = "1.4.10"
-    ext.junit = "4.13.1"
+    ext.kotlin_version = "1.5.21"
+    ext.junit = "4.13.2"
     ext.junit_ext = "1.1.2"
-    ext.espresso_core = "3.3.0"
+    ext.espresso_core = "3.4.0"
+    ext.annotation = "1.1.0"
+    ext.nav_version = "2.3.3"
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.0'
+        classpath 'com.android.tools.build:gradle:4.2.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
+        classpath 'com.google.gms:google-services:4.3.8'
     }
 }
 
@@ -45,12 +49,16 @@ subprojects {
                     sourceCompatibility JavaVersion.VERSION_1_8
                     targetCompatibility JavaVersion.VERSION_1_8
                 }
-                androidExtensions {
-                    experimental = true
-                }
                 kotlinOptions {
                     jvmTarget = "1.8"
                 }
+            }
+
+            dependencies {
+                testImplementation "junit:junit:$junit"
+                androidTestImplementation "androidx.test.ext:junit:$junit_ext"
+                androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core"
+                androidTestImplementation "androidx.annotation:annotation:$annotation"
             }
         }
     }

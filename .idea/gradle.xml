@@ -19,7 +19,12 @@
             <option value="$PROJECT_DIR$/commons/widget" />
             <option value="$PROJECT_DIR$/domains" />
             <option value="$PROJECT_DIR$/domains/directus" />
+            <option value="$PROJECT_DIR$/domains/todo" />
             <option value="$PROJECT_DIR$/domains/utangku" />
+            <option value="$PROJECT_DIR$/features" />
+            <option value="$PROJECT_DIR$/features/auth" />
+            <option value="$PROJECT_DIR$/features/favorite" />
+            <option value="$PROJECT_DIR$/features/todo" />
             <option value="$PROJECT_DIR$/libraries" />
             <option value="$PROJECT_DIR$/libraries/cache" />
             <option value="$PROJECT_DIR$/libraries/core" />

@@ -13,7 +13,7 @@ object RuntimeLocalChanger {
 
     @SuppressLint("DefaultLocale")
     fun updateLocale(context: Context, language: String): Context {
-        val savedLocale = Locale(language.toLowerCase())
+        val savedLocale = Locale(language.lowercase())
         Locale.setDefault(savedLocale)
         val configuration = Configuration()
         configuration.setLocale(savedLocale)

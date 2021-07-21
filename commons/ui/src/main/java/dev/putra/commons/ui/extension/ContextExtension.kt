@@ -13,6 +13,7 @@ import android.graphics.Color
 import android.net.Uri
 import android.nfc.NfcManager
 import android.util.TypedValue
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.annotation.ColorInt
@@ -22,6 +23,8 @@ import androidx.annotation.AttrRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
+import com.google.android.material.snackbar.Snackbar
+import dev.putra.commons.ui.utils.EspressoIdlingResource
 import kotlin.reflect.KProperty1
 
 fun Context.toast(@StringRes resId: Int, length: Int = Toast.LENGTH_SHORT) {
@@ -30,6 +33,21 @@ fun Context.toast(@StringRes resId: Int, length: Int = Toast.LENGTH_SHORT) {
 
 fun Context.toast(message: String, length: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, message, length).show()
+}
+
+fun View.showSnackbar(snackbarText: String, timeLength: Int) {
+    Snackbar.make(this, snackbarText, timeLength).run {
+        addCallback(object : Snackbar.Callback() {
+            override fun onShown(sb: Snackbar?) {
+                EspressoIdlingResource.increment()
+            }
+
+            override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+                EspressoIdlingResource.decrement()
+            }
+        })
+        show()
+    }
 }
 
 inline fun <reified T : AppCompatActivity> Context.startActivity(

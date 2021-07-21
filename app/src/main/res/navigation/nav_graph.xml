@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:progressDestination="@id/installModuleProgressFragment"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="dev.putra.chyruscore.feature.auth.ui.splash.SplashFragment"
+        android:label="SplashFragment"
+        app:moduleName="auth">
+        <action
+            android:id="@+id/action_splashFragment_to_nav_todo_graph"
+            app:destination="@id/nav_todo_graph"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <include-dynamic
+        android:id="@+id/nav_todo_graph"
+        app:graphResName="nav_todo_graph"
+        app:moduleName="todo" />
+
+    <include-dynamic
+        android:id="@+id/nav_favorite_graph"
+        app:graphResName="nav_favorite_graph"
+        app:moduleName="favorite" />
+
+    <fragment
+        android:id="@+id/installModuleProgressFragment"
+        android:name="dev.putra.chyruscore.ui.dynamicfeat.InstallModuleProgressFragment"
+        android:label="InstallModuleProgressFragment" />
+
+</navigation>

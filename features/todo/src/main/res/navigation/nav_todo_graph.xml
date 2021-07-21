@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:moduleName="todo"
+    app:progressDestination="@id/installModuleProgressFragment"
+    app:startDestination="@id/todoFragment">
+
+    <fragment
+        android:id="@+id/todoFragment"
+        android:name="dev.putra.chyruscore.feature.todo.ui.todo.TodoFragment"
+        android:label="TodoFragment"
+        app:moduleName="todo">
+        <action
+            android:id="@+id/action_todoFragment_to_addTodoDialogFragment"
+            app:destination="@id/addTodoDialogFragment" />
+        <action
+            android:id="@+id/action_todoFragment_to_detailToDoFragment"
+            app:destination="@id/detailToDoFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/addTodoDialogFragment"
+        android:name="dev.putra.chyruscore.feature.todo.ui.addtodo.AddTodoDialogFragment"
+        android:label="AddTodoDialogFragment"
+        app:moduleName="todo" />
+    <fragment
+        android:id="@+id/detailToDoFragment"
+        android:name="dev.putra.chyruscore.feature.todo.ui.detailtodo.DetailToDoFragment"
+        android:label="DetailToDoFragment"
+        app:moduleName="todo" />
+
+    <fragment
+        android:id="@+id/installModuleProgressFragment"
+        android:name="dev.putra.chyruscore.ui.dynamicfeat.InstallModuleProgressFragment"
+        android:label="InstallModuleProgressFragment" />
+</navigation>

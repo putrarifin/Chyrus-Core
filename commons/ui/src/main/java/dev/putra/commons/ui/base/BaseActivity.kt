@@ -3,6 +3,8 @@ package dev.putra.commons.ui.base
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
+import com.google.android.material.snackbar.Snackbar
+import dev.putra.commons.ui.extension.showSnackbar
 import dev.putra.commons.ui.extension.toast
 import dev.putra.commons.ui.utils.ProgressDialog
 import dev.putra.commons.utilities.data.ErrorNetwork
@@ -32,7 +34,10 @@ abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
     }
 
     fun handleError(error: ErrorNetwork) {
-        toast(error.message)
+        binding.root.showSnackbar(
+            error.message,
+            Snackbar.LENGTH_SHORT
+        )
         if (error.code == 401) {
             handleShouldLogout()
         }

@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import androidx.appcompat.app.AlertDialog
 import dev.putra.libraries.picker.R
 import dev.putra.libraries.picker.constant.ImageProvider
+import dev.putra.libraries.picker.databinding.DialogChooseAppBinding
 import dev.putra.libraries.picker.listener.ResultListener
-import kotlinx.android.synthetic.main.dialog_choose_app.view.*
 
 internal object DialogHelper {
 
@@ -16,11 +16,10 @@ internal object DialogHelper {
      */
     fun showChooseAppDialog(context: Context, listener: ResultListener<ImageProvider>) {
         val layoutInflater = LayoutInflater.from(context)
-        val customView = layoutInflater.inflate(R.layout.dialog_choose_app, null)
-
+        val viewBinding = DialogChooseAppBinding.inflate(layoutInflater)
         val dialog = AlertDialog.Builder(context)
             .setTitle(R.string.picker_title_choose_image_provider)
-            .setView(customView)
+            .setView(viewBinding.root)
             .setOnCancelListener {
                 listener.onResult(null)
             }
@@ -30,13 +29,13 @@ internal object DialogHelper {
             .show()
 
         // Handle Camera option click
-        customView.lytCameraPick.setOnClickListener {
+        viewBinding.lytCameraPick.setOnClickListener {
             listener.onResult(ImageProvider.CAMERA)
             dialog.dismiss()
         }
 
         // Handle Gallery option click
-        customView.lytGalleryPick.setOnClickListener {
+        viewBinding.lytGalleryPick.setOnClickListener {
             listener.onResult(ImageProvider.GALLERY)
             dialog.dismiss()
         }

@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 android {
     defaultConfig {
@@ -18,8 +17,4 @@ android {
 dependencies {
     implementation project(':libraries:cache')
     implementation project(':libraries:network')
-
-    testImplementation "junit:junit:$junit"
-    androidTestImplementation "androidx.test.ext:junit:$junit_ext"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core"
 }

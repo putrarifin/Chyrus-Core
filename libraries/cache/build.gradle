@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 android {
     defaultConfig {
@@ -20,8 +19,4 @@ dependencies {
 
     api 'com.github.pakoito:RxPaper2:1.4.0'
     api 'io.reactivex.rxjava2:rxkotlin:2.4.0'
-
-    testImplementation "junit:junit:$junit"
-    androidTestImplementation "androidx.test.ext:junit:$junit_ext"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core"
 }

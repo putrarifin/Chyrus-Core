@@ -10,7 +10,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import coil.api.load
+import coil.load
 import dev.putra.commons.ui.R
 import dev.putra.commons.ui.utils.RecyclerViewItemDecoration
 import kotlin.random.Random

@@ -8,9 +8,11 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
 
+@ExperimentalCoroutinesApi
 class FlowSharedPreferences(
         val sharedPreferences: SharedPreferences
 ) {
+
 
     val keyFlow = callbackFlow {
         val listener = SharedPreferences.OnSharedPreferenceChangeListener { _, key -> offer(key) }

@@ -19,9 +19,6 @@ class CropProvider(activity: ImagePickerActivity) : BaseProvider(activity) {
     companion object {
         private val TAG = CropProvider::class.java.simpleName
 
-        /**
-         * Key to Save/Retrieve Crop File state
-         */
         private const val STATE_CROP_FILE = "state.crop_file"
     }
 
@@ -53,47 +50,22 @@ class CropProvider(activity: ImagePickerActivity) : BaseProvider(activity) {
         }
     }
 
-    /**
-     * Save CameraProvider state
-     *
-     * mCropImageFile will lose its state when activity is recreated on
-     * Orientation change or for Low memory device.
-     *
-     * Here, We Will save its state for later use
-     *
-     * Note: To produce this scenario, enable "Don't keep activities" from developer options
-     */
     override fun onSaveInstanceState(outState: Bundle) {
         // Save crop file
         outState.putSerializable(STATE_CROP_FILE, mCropImageFile)
     }
 
-    /**
-     * Retrieve CropProvider state
-     */
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         // Restore crop file
         mCropImageFile = savedInstanceState?.getSerializable(STATE_CROP_FILE) as File?
     }
 
-    /**
-     * Check if crop should be enabled or not
-     *
-     * @return Boolean. True if Crop should be enabled else false.
-     */
     fun isCropEnabled() = mCrop
 
-    /**
-     * Start Crop Activity
-     */
     fun startIntent(file: File) {
         cropImage(file)
     }
 
-    /**
-     * @param file Image File to be cropped
-     * @throws IOException if failed to crop image
-     */
     @Throws(IOException::class)
     private fun cropImage(file: File) {
         mCropImageFile = FileUtil.getImageFile(dir = mFileDir)
@@ -131,13 +103,6 @@ class CropProvider(activity: ImagePickerActivity) : BaseProvider(activity) {
         }
     }
 
-    /**
-     * Handle Crop Intent Activity Result
-     *
-     * @param requestCode It must be {@link UCrop#REQUEST_CROP}
-     * @param resultCode For success it should be {@link Activity#RESULT_OK}
-     * @param data Result Intent
-     */
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == UCrop.REQUEST_CROP) {
             if (resultCode == Activity.RESULT_OK) {
@@ -148,11 +113,6 @@ class CropProvider(activity: ImagePickerActivity) : BaseProvider(activity) {
         }
     }
 
-    /**
-     * This method will be called when final result fot this provider is enabled.
-     *
-     * @param file cropped file
-     */
     private fun handleResult(file: File?) {
         if (file != null) {
             activity.setCropImage(file)
@@ -161,9 +121,6 @@ class CropProvider(activity: ImagePickerActivity) : BaseProvider(activity) {
         }
     }
 
-    /**
-     * Delete Crop file is exists
-     */
     override fun onFailure() {
         mCropImageFile?.delete()
     }

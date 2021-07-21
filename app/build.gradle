@@ -1,17 +1,18 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'com.google.gms.google-services'
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.1"
+    compileSdkVersion AndroidConfig.COMPILE_SDK_VERSION
+    buildToolsVersion AndroidConfig.BUILD_TOOLS_VERSION
 
     defaultConfig {
-        applicationId "dev.putra.chyruscore"
-        minSdkVersion 22
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        applicationId AndroidConfig.APPLICATION_ID
+        minSdkVersion AndroidConfig.MIN_SDK_VERSION
+        targetSdkVersion AndroidConfig.TARGET_SDK_VERSION
+        versionCode AndroidConfig.VERSION_CODE
+        versionName AndroidConfig.VERSION_NAME
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -22,15 +23,118 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
+    dynamicFeatures = [':features:auth', ':features:favorite', ':features:todo']
 }
 
 dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
+    api project(':libraries:core')
+    implementation project(':libraries:network')
+    implementation project(':libraries:cache')
+    implementation project(':libraries:security')
+    api project(':commons:ui')
 
-    testImplementation "junit:junit:$junit"
-    androidTestImplementation "androidx.test.ext:junit:$junit_ext"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core"
+    api "com.google.android.play:core-ktx:1.8.1"
+
+    implementation platform('com.google.firebase:firebase-bom:26.7.0')
+    implementation 'com.google.firebase:firebase-messaging-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
+    api 'com.jakewharton.timber:timber:4.7.1'
+}
+
+task runBundleDebug(dependsOn: 'bundleDebug') {
+    def appsName = 'app_debug_test.apk'
+    def destination = "build/outputs/bundle/debug"
+
+    Properties properties = new Properties()
+
+    File localProperties = project.rootProject.file("local.properties")
+    if (localProperties.exists()) {
+        properties.load(localProperties.newDataInputStream())
+    }
+
+    doFirst {
+        exec {
+            println("build apks...")
+            workingDir '../'
+            commandLine 'java',
+                    '-jar',
+                    'bundletool.jar',
+                    'build-apks',
+                    '--bundle=app/build/outputs/bundle/debug/app-debug.aab',
+                    '--output=app/build/outputs/bundle/debug/app-debug.apks',
+                    '--overwrite', '--mode=universal', '--ks=ichyrus_key.jks', '--local-testing',
+                    '--ks-pass=pass:' + properties.get('storePassword'),
+                    '--ks-key-alias=' + properties.get('keyAlias'),
+                    '--key-pass=pass:' + properties.get('keyPassword')
+        }
+    }
+    doLast {
+        def desiredName = "app-debug.zip"
+        ext.apk = file("build/outputs/bundle/debug/app-debug.apks")
+
+        if (ext.apk.exists()) {
+            copy {
+                println("renaming to zip...")
+                from ext.apk.absolutePath
+                into destination
+                rename { desiredName }
+            }
+        } else {
+            println("apks file not found...")
+        }
+
+        exec {
+            println("unzip the apks...")
+            workingDir '../'
+            commandLine 'unzip',
+                    'app/build/outputs/bundle/debug/app-debug.zip',
+                    '-d',
+                    'app/build/outputs/bundle/debug/'
+        }
+
+        //rename apk
+        ext.universal = file("build/outputs/bundle/debug/universal.apk")
+        if (ext.universal.exists()) {
+            println("trying rename apk...")
+            copy {
+                println("rename universal apk...")
+                from ext.universal.absolutePath
+                into destination
+                rename { appsName }
+            }
+        } else {
+            println("universal file not found...")
+        }
+
+        //java -jar bundletool.jar build-apks --bundle=app/build/outputs/bundle/debug/app-debug.aab --output=app/build/outputs/bundle/debug/app-debug.apks --overwrite --ks=ichyrus_key.jks --local-testing --ks-pass=pass:Chyrus@160811 --ks-key-alias=chyrus --key-pass=pass:Chyrus@160811
+        //java -jar bundletool.jar install-apks --apks=app/build/outputs/bundle/debug/app-debug.apks
+
+        //run
+        exec {
+            println("run apks...")
+            workingDir '../'
+            commandLine 'java',
+                    '-jar',
+                    'bundletool.jar',
+                    'install-apks',
+                    '--apks=app/build/outputs/bundle/debug/app-debug.apks'
+        }
+
+        //upload apk
+//        exec {
+//            println("upload apk...")
+//            workingDir '../'
+//            commandLine 'firebase',
+//                    'appdistribution:distribute', 'app/build/outputs/bundle/developmentRelease/' + appsName,
+//                    '--app', '1:667680061617:android:a17d1560bb4e096d37ca90',
+//                    '--token', '' + properties.get('tokenFirebase') + '',
+//                    '--release-notes-file', 'releasenotes.txt',
+//                    '--groups-file', 'groupstester.txt'
+//        }
+    }
 }
